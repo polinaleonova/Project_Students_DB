@@ -1,0 +1,57 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Students_DB</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'lib/bootstrap-3.3.5-dist/css/bootstrap.css' %}" rel="stylesheet">
+{#    <link href="{% static 'css/project_students_db.css' %}" rel="stylesheet">#}
+    <script src="{% static 'js/lib/jquery-1.11.3.js' %}"></script>
+    <script src="{% static 'lib/bootstrap-3.3.5-dist/js/bootstrap.js' %}"></script>
+
+</head>
+
+<body>
+    <div id="b-navbar">
+       <table class="table">
+        <tbody>
+            <tr>
+                <td>
+                {% block login %}{% endblock %}
+                {% block register %}{% endblock %}
+                {%  if username %}
+                <a href="/auth/logout/">Exit({{ username }})</a>
+                {% else %}
+                <a href="/auth/login/">Enter({{ username }})</a>
+                {% endif %}
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    </div>
+
+{#    {% block group %}#}
+    <table class="table">
+        <thead>
+             <tr>
+               <th>Name of group</th><th>Number of students</th><th>Name of Praepostor</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for group in list_groups %}
+            <tr>
+                <td>{{ group.group_name }}</td><td>{{ group.number }}</td><td>{{ group.praepostor }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{#    {% endblock %}#}
+
+<div class="menu">
+</div>
+
+</body>
+
+</html>
