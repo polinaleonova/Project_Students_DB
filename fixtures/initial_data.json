@@ -1,0 +1,10 @@
+[
+  {
+    "model": "models_project.models.Group",
+    "pk": 1,
+    "fields": {
+      "name_group" : "26",
+      "number_of" : "5"
+    }
+  }
+]
