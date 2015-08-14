@@ -7,11 +7,13 @@ class Student(models.Model):
     date_birthday = models.DateField()
     tiket_number = models.IntegerField()
     foto = models.ImageField(
-    upload_to='img/foto',
+        upload_to='img/foto',
         null=True,
         blank=True
     )
-    group = models.ForeignKey('Group')
+    group = models.ForeignKey('Group',
+                              blank=True,
+                              null=True)
 
     def __unicode__(self):
         return self.student_name
@@ -21,6 +23,7 @@ class Group(models.Model):
     name_group = models.CharField(max_length=50)
     praepostor = models.OneToOneField(Student,
                                       related_name='praepostor_of_group',
+                                      blank=True,
                                       null=True)
 
     def __unicode__(self):
