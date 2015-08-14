@@ -20,10 +20,10 @@
                 <td>
                 {% block login %}{% endblock %}
                 {% block register %}{% endblock %}
-                {%  if username %}
-                <a href="/auth/logout/">Exit({{ username }})</a>
+                {%  if user.username %}
+                <a href="/auth/logout/">Exit({{ user.username }})</a>
                 {% else %}
-                <a href="/auth/login/">Enter({{ username }})</a>
+                <a href="/auth/login/">Enter</a>
                 {% endif %}
                 </td>
             </tr>

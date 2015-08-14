@@ -27,8 +27,9 @@ def login(request):
 
 
 def logout(request):
-    logout(request)
-    return redirect("/")
+    auth.logout(request)
+    return redirect('/')
+
 
 def register(request):
     args={}
