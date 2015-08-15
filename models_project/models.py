@@ -13,6 +13,7 @@ class Student(models.Model):
     )
     group = models.ForeignKey('Group',
                               blank=True,
+                              on_delete=models.SET_NULL,
                               null=True)
 
     def __unicode__(self):

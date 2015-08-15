@@ -1,0 +1,9 @@
+{% extends 'groups.html' %}
+{% block changing_groups %}
+    <td>
+        <a href="/changing_data/{{ object_for_changing }}/edition/{{ group.id_group }}/">Edit</a>
+        <a href="/changing_data/{{ object_for_changing }}/creation/{{ group.id_group }}/">Create</a>
+        <a href="/changing_data/{{ object_for_changing }}/delete/{{ group.id_group }}/">Delete</a>
+    </td>
+    <div>{{ ololo }}</div>
+{% endblock %}
