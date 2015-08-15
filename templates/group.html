@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+    {% block students %}
+    {% load static from staticfiles %}
+        {#    {% load thumbnail %}#}
+        <table class="table">
+            <thead>
+                 <tr>
+                   <th>Name of Student</th><th>Foto</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in list_students %}
+                    <tr>
+{#            <td>{{ s.student_name }}</td>#}
+{#            {% thumbnail "{{ s.foto }}" "100x100" as im %}#}
+{#    		<td><img src="{{ im.url }}"  alt="фото"></td>#}
+{#			{% endthumbnail %}#}
+                        <td>{{ s.student_name }}</td><td><img src="{% static  s.foto  %}" alt="фото"></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            <span class="step-links">
+                {% if list_students.has_previous %}
+                    <a href="?page={{ list_students.previous_page_number }}">previous</a>
+                {% endif %}
+            <span class="current">
+                Page {{ list_students.number }} of {{ list_students.paginator.num_pages }}.
+            </span>
+                {% if list_students.has_next %}
+                    <a href="?page={{ list_students.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endblock %}
+
+{#{% thumbnail '{{MEDIA_URL}}{{s.foto}}' "100x100" crop="center" as im %}#}
+{#    			<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">#}
+{#				{% endthumbnail %}#}

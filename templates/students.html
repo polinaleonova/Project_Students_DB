@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+    {% block students %}
+    {% load static from staticfiles %}
+    <table class="table">
+        <thead>
+             <tr>
+               <th>Name of Student</th><th>Foto</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for s in list_students %}
+            <tr>
+                <td>{{ s.student_name }}</td><td><img src="{% static  s.foto  %}" alt="фото"></td>
+            </tr>
+        {% endfor %}
+        <div class="pagination">
+    <span class="step-links">
+        {% if list_students.has_previous %}
+            <a href="?page={{ list_students.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ list_students.number }} of {{ list_students.paginator.num_pages }}.
+        </span>
+
+        {% if list_students.has_next %}
+            <a href="?page={{ list_students.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+        </tbody>
+    </table>
+    {% endblock %}

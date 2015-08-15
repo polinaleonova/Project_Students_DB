@@ -16,9 +16,13 @@ urlpatterns = patterns(
         'main.views.groups',
         name='groups'),
 
-    url(r'^students/?$',
-        'main.views.students',
-        name='students'),
+    url(r'^group/?(?P<id_group>(.*))/?$',
+        'main.views.group',
+        name='group'),
+
+    # url(r'^students/?$',
+    #     'main.views.students',
+    #     name='students'),
 
     url(r'^auth/login/?$',
         'main.views.login',
