@@ -1,5 +1,5 @@
 [{"pk": 1, "model": "models_project.student",
-    "fields": {"student_name": "Ris Northon", "foto": "img/foto/rabb.jpg", "group": 2, "date_birthday": "1995-08-13", "tiket_number": 10001}},
+    "fields": {"student_name": "Ris Northon", "foto": "img/foto/01.jpg", "group": 2, "date_birthday": "1995-08-13", "tiket_number": 10001}},
     {"pk": 2, "model": "models_project.student",
         "fields": {"student_name": "James Gallowey", "foto": "img/foto/02.jpg", "group": 1, "date_birthday": "1994-03-28", "tiket_number": 10032}},
     {"pk": 3, "model": "models_project.student",
@@ -10,5 +10,5 @@
         "fields": {"student_name": "Robert Freedman", "foto": "img/foto/04.jpg", "group": 1, "date_birthday": "1995-11-10", "tiket_number": 10002}},
     {"pk": 1, "model": "models_project.group", "fields": {"praepostor": 5, "name_group": "A10"}},
     {"pk": 2, "model": "models_project.group", "fields": {"praepostor": 1, "name_group": "A20"}},
-    {"pk": 4, "model": "models_project.group", "fields": {"praepostor": 4, "name_group": "B10"}},
-    {"pk": 5, "model": "models_project.group", "fields": {"praepostor": null, "name_group": "B20"}}]
+    {"pk": 3, "model": "models_project.group", "fields": {"praepostor": null, "name_group": "B10"}},
+    {"pk": 4, "model": "models_project.group", "fields": {"praepostor": 4, "name_group": "B20"}}]

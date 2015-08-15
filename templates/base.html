@@ -32,22 +32,23 @@
     </table>
     </div>
 
-{#    {% block group %}#}
-    <table class="table">
-        <thead>
-             <tr>
-               <th>Name of group</th><th>Number of students</th><th>Name of Praepostor</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for group in list_groups %}
-            <tr>
-                <td>{{ group.group_name }}</td><td>{{ group.number }}</td><td>{{ group.praepostor }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{#    {% endblock %}#}
+    {% block groups %}{% endblock %}
+{#    <table class="table">#}
+{#        <thead>#}
+{#             <tr>#}
+{#               <th>Name of group</th><th>Number of students</th><th>Name of Praepostor</th>#}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        {% for group in list_groups %}#}
+{#            <tr>#}
+{#                <td>{{ group.group_name }}</td><td>{{ group.number }}</td><td>{{ group.praepostor }}</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+    {% block students %}
+    {% endblock %}
 
 <div class="menu">
 </div>

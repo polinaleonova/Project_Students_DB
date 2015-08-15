@@ -120,7 +120,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 FIXTURE_DIRS= (
-   os.path.join(CURRENT_DIR, 'fixtures'),
+   os.path.join(BASE_DIR, 'fixtures'),
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -170,6 +170,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django_nose',
     'main',
+    'sorl.thumbnail',
     'models_project',
 )
 
