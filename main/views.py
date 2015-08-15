@@ -67,14 +67,15 @@ def groups(request):
             context['praepostor'] = ""
             context['id_group'] = Group.objects.filter(id=i).values('id')[0]['id']
         list_groups.append(context)
-    context_dictionary = RequestContext(request, {'list_groups':list_groups})
+    context_dictionary = RequestContext(request, {'list_groups':list_groups,'object_for_changing':'groups'})
     return HttpResponse(template.render(context_dictionary))
 
 
 def group(request, id_group):
     template = loader.get_template('group.html')
     list_students = []
-    this_group = Group.objects.get(id = id_group)
+    id =id_group
+    this_group = Group.objects.get(id = id)
     students = Student.objects.filter(group=this_group)
     for i in range(len(students)):
         context = {}
@@ -89,7 +90,7 @@ def group(request, id_group):
         list_students = paginator.page(1)
     except EmptyPage:
         list_students = paginator.page(paginator.num_pages)
-    context_dictionary = RequestContext(request, {'list_students':list_students})
+    context_dictionary = RequestContext(request, {'list_students':list_students,'object_for_changing':'group'})
     return HttpResponse(template.render(context_dictionary))
 
 
@@ -114,8 +115,38 @@ def group(request, id_group):
 #     return HttpResponse(template.render(context_dictionary))
 
 
-def redaction(request):
-    pass
+def changing_data(request, id):
+    template_groups = loader.get_template('changing_groups.html')
+    context_dictionary = RequestContext(request, {'ololo':'ololo'})
+    return HttpResponse(template_groups.render(context_dictionary))
+
+
+def changing(request, entity):
+    if entity == 'group':
+        template_group = loader.get_template('changing_group.html')
+        context_dictionary = RequestContext(request, {'object_for_changing':entity, 'id':'ololo'})
+        return HttpResponse(template_group.render(context_dictionary))
+    else:
+        template_groups = loader.get_template('changing_groups.html')
+        list_groups=[]
+        groups = Group.objects.all()
+        for i in range(1,len(groups)+1):
+            context={}
+            if bool(Student.objects.filter(group = groups[i-1])):
+                context['name_group'] = Group.objects.filter(id=i).values('name_group')[0]['name_group']
+                context['count'] = Student.objects.filter(group = groups[i-1]).count()
+                id_praerostor = Group.objects.filter(id=i).values('praepostor')[0]['praepostor']
+                context['praepostor'] = Student.objects.get(id=id_praerostor)
+                context['id_group'] = Group.objects.filter(id=i).values('id')[0]['id']
+            else:
+                context['name_group'] = Group.objects.filter(id=i).values('name_group')[0]['name_group']
+                context['count'] = 0
+                context['praepostor'] = ""
+                context['id_group'] = Group.objects.filter(id=i).values('id')[0]['id']
+            list_groups.append(context)
+        context_dictionary = RequestContext(request, {'list_groups':list_groups,
+                                                      'object_for_changing':'groups'})
+        return HttpResponse(template_groups.render(context_dictionary))
 
 
 def list_view(request, *args, **kwargs):

@@ -1,5 +1,5 @@
-   {% extends 'base.html' %}
-    {% block groups %}
+{% extends 'base.html' %}
+   {% block groups %}
     <table class="table">
         <thead>
              <tr>
@@ -9,9 +9,14 @@
         <tbody>
         {% for group in list_groups %}
             <tr>
-                <td><a href="/group/{{ group.id_group }}">{{ group.name_group }}</a></td><td>{{ group.count }}</td><td>{{ group.praepostor}}</td>
+                <td><a href="/group/{{ group.id_group }}">{{ group.name_group }}</a></td>
+                <td>{{ group.count }}</td>
+                <td>{{ group.praepostor}}</td>
+                {% block changing_groups %}{% endblock %}
             </tr>
         {% endfor %}
         </tbody>
     </table>
+
+    <a href="/changing/{{ object_for_changing }}/">Change the rows of the table Groups</a>
     {% endblock %}

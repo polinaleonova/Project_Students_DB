@@ -20,6 +20,14 @@ urlpatterns = patterns(
         'main.views.group',
         name='group'),
 
+    url(r'^changing/(?P<entity>(.*))/?$',
+        'main.views.changing',
+        name='changing'),
+
+    url(r'^changing_data/?(groups|group)/?(edition|creation|delete)/?(?P<id>(.*))/?$',
+        'main.views.changing_data',
+        name='changing_data'),
+
     # url(r'^students/?$',
     #     'main.views.students',
     #     name='students'),
