@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block form_edit_groups %}
+    <div>FORM FOR EDITION GROUP</div>
+        <form name='edit_group' action="/submition/{{ object_for_changing }}/{{ id_group }}/" method='post'>
+            <label for="name_group">NAME GROUP</label>
+            <input type="text" name="name_group" value="{{ name_group }}">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name of Student</th><th>Ticket number</th><th>Data_of_birthday</th><th>Foto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for s in list_students %}
+                    <tr>
+                        <td><input type="text" name="student_name" value="{{ s.student_name }}"></td>
+                        <td><input type="text" name="student_ticket_number" value="{{ s.student_ticket_number }}"></td>
+                        <td><input type="text" name="dob" value="{{ s.dob }}"></td>
+                        <td><input type="file" name="foto" value="{% static  s.foto  %}" ></td>
+                        <td><a href="/changing_data/{{ student }}/edition/{{ s.id_student }}/">Edit</a></td>
+                        <td><a href="/changing_data/{{ student }}/delete/{{ s.id_student }}/">Delete</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        <input type="submit" class="button" value="SUBMIT">
+        </form>
+        <div>CREATE NEW STUDENT</div>
+        <form name='new_student' action="/changing_data/{{ student }}/creation/{{ id_group }}/" method='post'>
+
+            <label for="student_name">NAME STUDENT</label>
+            <input type="text" name="student_name">
+
+            <label for="student_ticket_number">STUDENT'S TICKET NUMBER</label>
+            <input type="text" name="student_ticket_number">
+
+            <label for="dob">DOB</label>
+            <input type="text" name="dob">
+
+            <label for="foto">FOTO</label>
+            <input type="file" name="foto">
+
+            <input type="submit" class="button" value="CREATE STUDENT">
+
+        </form>
+{% endblock %}

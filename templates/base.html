@@ -31,10 +31,11 @@
     </table>
     </div>
     {% block groups %}{% endblock %}
-    {% block students %}{% endblock %}
+    {% block group %}{% endblock %}
 <div class="menu">
 </div>
-
+{% block form_edit_groups %}{% endblock %}
+{% block form_edit_student %}{% endblock %}
+{{entity}}
 </body>
-
 </html>

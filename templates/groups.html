@@ -14,9 +14,11 @@
                 <td>{{ group.praepostor}}</td>
                 {% block changing_groups %}{% endblock %}
             </tr>
+            {% block form_newgroup_creation %}{% endblock %}
         {% endfor %}
         </tbody>
     </table>
+    {% block create %}{% endblock %}
 
     <a href="/changing/{{ object_for_changing }}/">Change the rows of the table Groups</a>
     {% endblock %}

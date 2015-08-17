@@ -24,7 +24,11 @@ urlpatterns = patterns(
         'main.views.changing',
         name='changing'),
 
-    url(r'^changing_data/?(groups|group)/?(edition|creation|delete)/?(?P<id>(.*))/?$',
+    url(r'^submition/(?P<entity>(.*))/(?P<id>(.d*))/$',
+        'main.views.submition',
+        name='submition'),
+
+    url(r'^changing_data/(?P<entity>(.*))/(?P<action>(.*))/?(?P<id>(.d*))/$',
         'main.views.changing_data',
         name='changing_data'),
 
