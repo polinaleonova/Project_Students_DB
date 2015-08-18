@@ -1,0 +1,26 @@
+{#{% extends "admin/change_form.html" %}#}
+
+{% load tag_rend_ref %}
+  {% rend_reference  %}
+
+
+{#{% extends "admin/groups.html" %}#}
+{#{% block title %}Blog Usage Report{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#<h1>Blog Usage Report</h1>#}
+{#<table>#}
+{#<tr>#}
+{#  <td>Person</td>#}
+{#  <td>Blog Count</td>#}
+{#  <td>Total Bytes</td>#}
+{#</tr>#}
+{#{% for item in list_groups %}#}
+{#  <tr align="center">#}
+{#    <td>{{ item.name_group }}</td>#}
+{#    <td>{{ item.count }}</td>#}
+{#    <td>{{ item.praepostor }}</td>#}
+{#  </tr>#}
+{#{% endfor %}#}
+{#</table>#}
+{#{% endblock %}#}

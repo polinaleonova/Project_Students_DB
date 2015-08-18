@@ -170,42 +170,16 @@ def changing_data(request, entity, action, id = None):
         return HttpResponse(template.render(context_dictionary))
 
     def student_edition(id_student):
-        student=Student.objects.get(id=id_student)
-        context={}
-        context['student_name'] = student
-        context['student_ticket_number'] = student.ticket_number
-        context['dob'] =  student.date_birthday
-        context['foto'] = str(student.foto)
-        context['id_student'] = student.id
-        context['object_for_changing'] = 'student'
-        # if request.method == "POST":
-        #     student_name=request.POST.get('student_name')
-        #     ticket_number =request.POST.get('student_ticket_number')
-        #     date_birthday=request.POST.get('dob')
-        #     foto = request.POST.get('foto')
-        #     if student_name != '':
-        #         st_to_edit = Student.objects.get(id=id_student)
-        #         st_to_edit.update(student_name=student_name,date_birthday=date_birthday,ticket_number=ticket_number,group=group_for_new_student)
-        #         st_to_edit.save()
-        #         return redirect('/changing/groups')
+        student = Student.objects.get(id=id_student)
+        context = dict({
+            'student_name': student,
+            'student_ticket_number': student.ticket_number,
+            'dob': student.date_birthday,
+            'foto': str(student.foto),
+            'id_student': student.id,
+            'object_for_changing': 'student'
+        })
         return render_to_response('form _edit_student.html', context)
-
-
-    # def ololo(id_group):
-    #     if request.method == "POST":
-    #         name_group = request.POST.get('name_group')
-    #         # students=Student.objects.filter(group=name_group)
-    #         this_group=Group.objects.get(id=id_group)
-    #         this_group.update(name_group=name_group)
-    #         this_group.save()
-    #         student_name = request.POST.get('name_student')
-    #         ticket_number = request.POST.get('student_ticket_number')
-    #         date_birthday = request.POST.get('dob')
-    #         foto = request.POST.get('foto')
-    #         st_to_update = Student.objects.create(student_name=student_name, date_birthday=date_birthday,ticket_number=ticket_number,group=group_for_new_student)
-    #         st_to_update.save()
-    #         return redirect('/changing/groups')
-
 
     def student_delete(id):
         group_with_this_st = Student.objects.get(id=id).group
@@ -233,14 +207,15 @@ def changing_data(request, entity, action, id = None):
                 return redirect('/changing_data/groups/edition/'+id_group+'/')
 
 
-    dict = {'groups/delete': groups_delete,
-            'groups/creation': groups_creation,
-            'groups/edition': groups_edition,
-            'student/delete': student_delete,
-            'student/creation': student_creation,
-            'student/edition': student_edition
+    dict_ = {
+        'groups/delete': groups_delete,
+        'groups/creation': groups_creation,
+        'groups/edition': groups_edition,
+        'student/delete': student_delete,
+        'student/creation': student_creation,
+        'student/edition': student_edition
     }
-    return dict[command](id)
+    return dict_[command](id)
 
 
 def changing(request, entity):
@@ -265,7 +240,6 @@ def changing(request, entity):
         context_dictionary = RequestContext(request, {'list_groups':list_groups,
                                                           'object_for_changing':'groups'})
         return HttpResponse(template_groups.render(context_dictionary))
-
 
 def list_view(request, *args, **kwargs):
     """
