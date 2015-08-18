@@ -3,19 +3,24 @@
     {% load static from staticfiles %}
         {#    {% load thumbnail %}#}
         <table class="table">
+            <caption>
+                Students of "{{ name_group }}" group
+            </caption>
             <thead>
                  <tr>
-                   <th>Name of Student</th><th>Foto</th>
+                     <th>Name of Student</th>
+                     <th>Foto</th>
                 </tr>
             </thead>
             <tbody>
-                {% for s in list_students %}
+                {% for student in list_students %}
                     <tr>
 {#            <td>{{ s.student_name }}</td>#}
 {#            {% thumbnail "{{ s.foto }}" "100x100" as im %}#}
 {#    		<td><img src="{{ im.url }}"  alt="фото"></td>#}
 {#			{% endthumbnail %}#}
-                        <td>{{ s.student_name }}</td><td><img src="{% static  s.foto  %}" alt="фото"></td>
+                        <td>{{ student.student_name }}</td>
+                        <td><img src="{% static  student.foto  %}" alt="foto" style="width: 100px"></td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -34,7 +39,7 @@
             </span>
         </div>
         {% block changing_group %}{% endblock %}
-        <a href="/changing/{{ object_for_changing }}/">Change the rows of the table Group</a>
+        <a href="/changing_data/groups/edition/{{ group_id }}/">Change the rows of the table Group</a>
     {% endblock %}
 
 {#{% thumbnail '{{MEDIA_URL}}{{s.foto}}' "100x100" crop="center" as im %}#}
