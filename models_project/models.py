@@ -1,5 +1,7 @@
-from os import path
+import json
+
 from django.db import models
+from django.db.models import signals
 
 
 class Student(models.Model):
@@ -11,9 +13,9 @@ class Student(models.Model):
         null=True,
         blank=True
     )
-    group = models.ForeignKey('Group',
-                              blank=True,
-                              # null=True
+    group = models.ForeignKey(
+        'Group',
+        blank=True,
     )
 
     def __unicode__(self):
@@ -32,3 +34,44 @@ class Group(models.Model):
         return self.name_group
 
 
+class History(models.Model):
+    model_id = models.CharField(max_length=255,
+                                null=True,
+                                default=None)
+    model_type = models.CharField(max_length=255)
+    action = models.CharField(max_length=255)
+    at = models.DateTimeField(auto_now_add=True)
+    model_json = models.TextField()
+
+    def __unicode__(self):
+        return '{} - {} - at {}'.format(self.action, self.model_type, self.at)
+
+def _handler_action(sender, instance, action):
+    for_json = {}
+    for key, value in instance.__dict__.iteritems():
+        try:
+            json.dumps(value)
+            for_json[key] = value
+        except TypeError:
+            pass
+    History.objects.create(
+        model_id=instance.id,
+        model_type=sender.__name__,
+        model_json=json.dumps(for_json),
+        action=action
+    )
+
+
+def on_remove(sender, instance, **kwargs):
+    _handler_action(sender, instance, 'delete')
+
+
+def on_save(sender, instance, **kwargs):
+    _handler_action(
+        sender, instance, 'create' if instance.id is None else 'edit'
+    )
+
+signals.pre_delete.connect(on_remove, sender=Group)
+signals.pre_save.connect(on_save, sender=Group)
+signals.pre_delete.connect(on_remove, sender=Student)
+signals.pre_save.connect(on_save, sender=Student)

@@ -26,11 +26,11 @@ urlpatterns = patterns(
         'main.views.changing',
         name='changing'),
 
-    url(r'^submition/(?P<entity>(.*))/(?P<id>(.d*))/$',
+    url(r'^submition/(?P<entity>(.*))/(?P<id>(.*))/$',
         'main.views.submition',
         name='submition'),
 
-    url(r'^changing_data/(?P<entity>(.*))/(?P<action>(.*))/?(?P<id>(.d*))/$',
+    url(r'^changing_data/(?P<entity>(.*))/(?P<action>(.*))/(?P<id>(.*))/$',
         'main.views.changing_data',
         name='changing_data'),
 
@@ -54,6 +54,6 @@ urlpatterns = patterns(
 
 
 # main page, also catching all other paths
-urlpatterns += patterns('', url(r'^(?P<optional>(.*))/?$',
-                                'main.views.list_view',
-                                name='list_view'))
+urlpatterns += patterns('', url(r'^/?$',
+                                'main.views.login',
+                                name='login'))

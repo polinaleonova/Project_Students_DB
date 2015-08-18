@@ -2,22 +2,25 @@
 {% load static from staticfiles %}
 {% block form_edit_student %}
     <div>FORM FOR EDITION STUDENT</div>
-        <form name='edit_group' action="/submition/{{ object_for_changing }}/{{ id_student }}/" method='post'>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Name of Student</th><th>Ticket number</th><th>Data_of_birthday</th><th>Foto</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" name="student_name" value="{{ student_name }}"></td>
-                        <td><input type="text" name="student_ticket_number" value="{{ student_ticket_number }}"></td>
-                        <td><input type="text" name="dob" value="{{ dob }}"></td>
-                        <td><input type="file" name="foto" value="{% static  foto  %}" ></td>
-                        <td><input type="submit" class="button" value="SUBMIT"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
+    <form name='edit_group' action="/submition/{{ object_for_changing }}/{{ student.id }}/" method='post' enctype="multipart/form-data">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name of Student</th><th>Ticket number</th><th>Data_of_birthday</th><th>Foto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" name="student_name" value="{{ student.student_name }}"></td>
+                    <td><input type="text" name="student_ticket_number" value="{{ student.ticket_number }}"></td>
+                    <td><input type="text" name="dob" value="{{ student.date_birthday|date:"c" }}"></td>
+                    <td>
+                        <img src="{% static  student.foto|stringformat:'s'  %}" alt="foto" style="width: 100px">
+                        <input type="file" name="foto" value="{{ student.foto }}">
+                    </td>
+                    <td><input type="submit" class="button" value="SUBMIT"></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
 {% endblock %}

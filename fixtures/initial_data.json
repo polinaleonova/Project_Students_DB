@@ -7,8 +7,95 @@
     {"pk": 4, "model": "models_project.student",
         "fields": {"student_name": "Jetro Wings", "foto": "img/foto/03.jpg", "group": 4, "date_birthday": "1994-01-14", "ticket_number": 10011}},
     {"pk": 5, "model": "models_project.student",
-        "fields": {"student_name": "Robert Freedman", "foto": "img/foto/04.jpg", "group": 1, "date_birthday": "1995-11-10", "ticket_number": 10002}},
+        "fields": {
+            "student_name": "Robert Freedman",
+            "foto": "img/foto/04.jpg",
+            "group": 1,
+            "date_birthday": "1995-11-10",
+            "ticket_number": 10002}
+    },
+    {"pk": 6, "model": "models_project.student",
+        "fields": {
+            "student_name": "Bob Freedman",
+            "foto": "img/foto/01.jpg",
+            "group": 1,
+            "date_birthday": "1994-12-10",
+            "ticket_number": 10003}
+    },
+    {"pk": 7, "model": "models_project.student",
+        "fields": {
+            "student_name": "Marina Goh",
+            "foto": "img/foto/05.jpg",
+            "group": 1,
+            "date_birthday": "1969-01-16",
+            "ticket_number": 10004}
+    },
+    {"pk": 8, "model": "models_project.student",
+        "fields": {
+            "student_name": "Matrin Foster",
+            "foto": "img/foto/04.jpg",
+            "group": 1,
+            "date_birthday": "1998-11-16",
+            "ticket_number": 10005}
+    },
+    {"pk": 9, "model": "models_project.student",
+        "fields": {
+            "student_name": "Jon Der",
+            "foto": "img/foto/01.jpg",
+            "group": 1,
+            "date_birthday": "1945-05-09",
+            "ticket_number": 10006}
+    },
+    {"pk": 10, "model": "models_project.student",
+        "fields": {
+            "student_name": "Wei Fang Tan",
+            "foto": "img/foto/01.jpg",
+            "group": 1,
+            "date_birthday": "1973-09-04",
+            "ticket_number": 10007}
+    },
+    {"pk": 11, "model": "models_project.student",
+        "fields": {
+            "student_name": "Taran Singht",
+            "foto": "img/foto/04.jpg",
+            "group": 1,
+            "date_birthday": "1999-01-01",
+            "ticket_number": 10008}
+    },
+    {"pk": 12, "model": "models_project.student",
+        "fields": {
+            "student_name": "Anurag Jo",
+            "foto": "img/foto/03.jpg",
+            "group": 1,
+            "date_birthday": "1995-10-10",
+            "ticket_number": 10009}
+    },
+    {"pk": 13, "model": "models_project.student",
+        "fields": {
+            "student_name": "Sicilia",
+            "foto": "img/foto/05.jpg",
+            "group": 1,
+            "date_birthday": "1988-06-01",
+            "ticket_number": 10014}
+    },
+    {"pk": 14, "model": "models_project.student",
+        "fields": {
+            "student_name": "Edwina Ko",
+            "foto": "img/foto/04.jpg",
+            "group": 1,
+            "date_birthday": "2001-02-09",
+            "ticket_number": 10012}
+    },
+    {"pk": 15, "model": "models_project.student",
+        "fields": {
+            "student_name": "Rikard",
+            "foto": "img/foto/05.jpg",
+            "group": 1,
+            "date_birthday": "1975-11-19",
+            "ticket_number": 10013}
+    },
     {"pk": 1, "model": "models_project.group", "fields": {"praepostor": 5, "name_group": "A10"}},
     {"pk": 2, "model": "models_project.group", "fields": {"praepostor": 1, "name_group": "A20"}},
     {"pk": 3, "model": "models_project.group", "fields": {"praepostor": null, "name_group": "B10"}},
-    {"pk": 4, "model": "models_project.group", "fields": {"praepostor": 4, "name_group": "B20"}}]
+    {"pk": 4, "model": "models_project.group", "fields": {"praepostor": 4, "name_group": "B20"}}
+]
