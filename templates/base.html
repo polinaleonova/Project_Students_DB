@@ -1,4 +1,5 @@
 {% load static from staticfiles %}
+{% load tag_rend_ref %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +37,9 @@
 </div>
 {% block form_edit_groups %}{% endblock %}
 {% block form_edit_student %}{% endblock %}
-{{entity}}
+{% block middleware %}{% endblock %}
+
+
+<br>
 </body>
 </html>

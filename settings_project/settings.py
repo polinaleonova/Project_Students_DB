@@ -106,6 +106,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'models_project.middleware_timeSqlRequest_countSqlRequest.SqlRequestParametersMiddleware',
     # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -142,6 +143,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.core.context_processors.csrf",
     "django.core.context_processors.request",
+    'utils.context_processor.my_settings',
+
 )
 
 TEMPLATE_DIRS = (
@@ -171,7 +174,7 @@ INSTALLED_APPS = (
     'django_nose',
     'main',
     'sorl.thumbnail',
-    'models_project',
+    'models_project'
 )
 
 
