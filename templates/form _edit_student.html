@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
+{% load thumbnail %}
 {% block form_edit_student %}
     <div>FORM FOR EDITION STUDENT</div>
     <form name='edit_group' action="/submition/{{ object_for_changing }}/{{ student.id }}/" method='post' enctype="multipart/form-data">
@@ -15,7 +16,13 @@
                     <td><input type="text" name="student_ticket_number" value="{{ student.ticket_number }}"></td>
                     <td><input type="text" name="dob" value="{{ student.date_birthday|date:"c" }}"></td>
                     <td>
-                        <img src="{% static  student.foto|stringformat:'s'  %}" alt="foto" style="width: 100px">
+                        {% thumbnail student.foto "1000" as big %}
+                            {% thumbnail student.foto "100x100" crop="center" as small %}
+                                <a href="{% static  big.url  %}" title="look">
+                                    <img src="{% static  small.url  %}">
+                                </a>
+                            {% endthumbnail %}
+                        {% endthumbnail %}
                         <input type="file" name="foto" value="{{ student.foto }}">
                     </td>
                     <td><input type="submit" class="button" value="SUBMIT"></td>

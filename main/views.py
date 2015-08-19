@@ -76,9 +76,11 @@ def group(request, id_group):
     this_group = Group.objects.get(id=id_group)
     students = Student.objects.filter(group=this_group)
     for student in students:
+        # f=get_thumbnail(str(student.foto),'50x100')
         context = dict({
             'student_name': student.student_name,
             'foto': str(student.foto)
+            # 'foto': f
         })
         list_students.append(context)
     paginator = Paginator(list_students, 5)
@@ -193,7 +195,7 @@ def changing_data(request, entity, action, id=None):
                     ticket_number=ticket_number,
                     foto=foto,
                     group_id=group_for_new_student.id)
-                st_to_create.save()
+                # st_to_create.save()
         return redirect(
             '/changing_data/groups/edition/'+id_group+'/')
 

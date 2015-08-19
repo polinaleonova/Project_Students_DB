@@ -2,13 +2,15 @@ import json
 
 from django.db import models
 from django.db.models import signals
+from sorl.thumbnail.shortcuts import get_thumbnail
+from sorl.thumbnail.fields import ImageField
 
 
 class Student(models.Model):
     student_name = models.CharField(max_length=50)
     date_birthday = models.DateField(null=True)
     ticket_number = models.IntegerField(null=True)
-    foto = models.ImageField(
+    foto = ImageField(
         upload_to='img/foto',
         null=True,
         blank=True
@@ -17,6 +19,16 @@ class Student(models.Model):
         'Group',
         blank=True,
     )
+
+    def get_thumbnail_html(self):
+        img = self.foto
+        html = ''
+        if img.name != '':
+            img_resize_url = unicode(get_thumbnail(img, '50x50').url)
+            html = '<img src="/static/{}" alt="foto"/>'.format(img_resize_url)
+        return html
+
+    get_thumbnail_html.allow_tags = True
 
     def __unicode__(self):
         return self.student_name
