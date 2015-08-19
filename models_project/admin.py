@@ -12,6 +12,8 @@ class GroupAdmin(admin.ModelAdmin):
 
 class StudentAdmin(admin.ModelAdmin):
     pass
+    list_display = ['student_name', 'date_birthday', 'ticket_number', 'get_thumbnail_html']
+
 
 
 admin.site.register(Student, StudentAdmin)

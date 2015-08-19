@@ -64,7 +64,7 @@ MEDIA_ROOT = 'static/'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = 'img/foto/'
+# MEDIA_URL = 'img/foto/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -206,12 +206,18 @@ INSTALLED_APPS = (
 #     }
 # }
 
-
 SESSION_REDIS_UNIX_DOMAIN_SOCKET_PATH = '/tmp/redis.sock'
-
+#
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.cache.RedisCache',
         'LOCATION': SESSION_REDIS_UNIX_DOMAIN_SOCKET_PATH,
     },
+    'thum': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'static/img/foto/cache'),
+    },
 }
+THUMBNAIL_CACHE = 'thum'
+THUMBNAIL_DEBUG = True
+# THUMBNAIL_STORAGE = os.path.join(BASE_DIR, 'static/img/foto/cache')

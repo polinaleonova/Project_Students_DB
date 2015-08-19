@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
     {% block group %}
     {% load static from staticfiles %}
-        {#    {% load thumbnail %}#}
+    {% load thumbnail %}
         <table class="table">
             <caption>
                 Students of "{{ name_group }}" group
@@ -15,12 +15,16 @@
             <tbody>
                 {% for student in list_students %}
                     <tr>
-{#            <td>{{ s.student_name }}</td>#}
-{#            {% thumbnail "{{ s.foto }}" "100x100" as im %}#}
-{#    		<td><img src="{{ im.url }}"  alt="фото"></td>#}
-{#			{% endthumbnail %}#}
                         <td>{{ student.student_name }}</td>
-                        <td><img src="{% static  student.foto  %}" alt="foto" style="width: 100px"></td>
+                        <td>
+                            {% thumbnail student.foto "1000" as big %}
+                                {% thumbnail student.foto "100x100" crop="center" as small %}
+                                    <a href="{% static  big.url  %}" title="look">
+                                        <img src="{% static  small.url  %}">
+                                    </a>
+                                {% endthumbnail %}
+                            {% endthumbnail %}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -41,7 +45,3 @@
         {% block changing_group %}{% endblock %}
         <a href="/changing_data/groups/edition/{{ group_id }}/">Change the rows of the table Group</a>
     {% endblock %}
-
-{#{% thumbnail '{{MEDIA_URL}}{{s.foto}}' "100x100" crop="center" as im %}#}
-{#    			<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">#}
-{#				{% endthumbnail %}#}

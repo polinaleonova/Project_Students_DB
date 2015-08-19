@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 {% load tag_rend_ref %}
+{% load thumbnail %}
 {% block form_edit_groups %}
     <div>FORM FOR EDITION GROUP</div>
         <form name='edit_group' action="/submition/{{ object_for_changing }}/{{ id_group }}/" method='post'>
@@ -32,7 +33,15 @@
                         <td><span>{{ student.student_name }}</span></td>
                         <td><span>{{ student.student_ticket_number }}</span></td>
                         <td><span>{{ student.dob }}</span></td>
-                        <td><img src="{% static  student.foto  %}" alt="foto" style="width: 100px"></td>
+                        <td>
+                            {% thumbnail student.foto "1000" as big %}
+                                {% thumbnail student.foto "100x100" crop="center" as small %}
+                                    <a href="{% static  big.url  %}" title="look">
+                                        <img src="{% static  small.url  %}">
+                                    </a>
+                                {% endthumbnail %}
+                            {% endthumbnail %}
+                        </td>
 
                         <td>
                             {% rend_reference student %}

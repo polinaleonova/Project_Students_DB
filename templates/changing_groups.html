@@ -9,9 +9,8 @@
     <div>{{ ololo }}</div>
 {% endblock %}
 {% block create %}
-   <form name='create_newgroup' action="/changing_data/{{ object_for_changing }}/creation/1/" method='post'>
-   <input type="text" name="name_group" placeholder="newgroup_name">
-   <input type="submit" class="button" value="CREATE">
+   <form name='create_newgroup' action="/changing_data/{{ object_for_changing }}/creation//" method='post'>
+       <input type="text" name="name_group" placeholder="newgroup_name">
+       <input type="submit" class="button" value="CREATE">
    </form>
-{#    <a href="/changing_data/{{ object_for_changing }}/creation/">Create</a>#}
 {% endblock %}
