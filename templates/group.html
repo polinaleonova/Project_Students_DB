@@ -2,23 +2,24 @@
     {% block group %}
     {% load static from staticfiles %}
     {% load thumbnail %}
-        <table class="table">
-            <caption>
-                Students of "{{ name_group }}" group
+        <div class="bs-docs-section" >
+        <table class=" table table-hover ">
+            <caption class="page-header">
+                <h4>Students of {{ name_group }}</h4>
             </caption>
             <thead>
                  <tr>
-                     <th>Name of Student</th>
-                     <th>Foto</th>
+                     <th class="text-center">Name of Student</th>
+                     <th class="text-center">Photo</th>
                 </tr>
             </thead>
             <tbody>
                 {% for student in list_students %}
                     <tr>
-                        <td>{{ student.student_name }}</td>
-                        <td>
-                            {% thumbnail student.foto "1000" as big %}
-                                {% thumbnail student.foto "100x100" crop="center" as small %}
+                        <td class="text-center">{{ student.student_name }}</td>
+                        <td class="text-center">
+                            {% thumbnail student.photo "1000" as big %}
+                                {% thumbnail student.photo "50x50" crop="center" as small %}
                                     <a href="{% static  big.url  %}" title="look">
                                         <img src="{% static  small.url  %}">
                                     </a>
@@ -29,19 +30,22 @@
                 {% endfor %}
             </tbody>
         </table>
-        <div class="pagination">
-            <span class="step-links">
+        </div>
+        <div class="bs-component">
+        <ul class="pager">
+            <li>
                 {% if list_students.has_previous %}
                     <a href="?page={{ list_students.previous_page_number }}">previous</a>
                 {% endif %}
-            <span class="current">
+            </li>
                 Page {{ list_students.number }} of {{ list_students.paginator.num_pages }}.
-            </span>
+            <li>
                 {% if list_students.has_next %}
                     <a href="?page={{ list_students.next_page_number }}">next</a>
                 {% endif %}
-            </span>
+            </li>
+        </ul>
         </div>
         {% block changing_group %}{% endblock %}
-        <a href="/changing_data/groups/edition/{{ group_id }}/">Change the rows of the table Group</a>
+{#        <a href="/changing_data/groups/edition/{{ group_id }}/">Change the rows of the table Group</a>#}
     {% endblock %}

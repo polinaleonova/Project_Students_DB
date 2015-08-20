@@ -3,72 +3,101 @@
 {% load tag_rend_ref %}
 {% load thumbnail %}
 {% block form_edit_groups %}
-    <div>FORM FOR EDITION GROUP</div>
-        <form name='edit_group' action="/submition/{{ object_for_changing }}/{{ id_group }}/" method='post'>
-            <label for="name_group">NAME GROUP</label>
-            <input id="name_group" type="text" name="name_group" value="{{ name_group }}">
-            <label for="praepostor_id">PRAEPOSTOR</label>
-            <select id="praepostor_id" name="praepostor_id" value="{{ praepostor_id }}">
-                {% for student in list_students %}
-                    <option value="{{ student.id_student }}"
-                            {% if student.id_student == praepostor_id %} selected="selected" {% endif %}>
-                        {{ student.student_name }}
-                    </option>
-                {% endfor %}
-            </select>
-            <input type="submit" class="button" value="SUBMIT">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Name of Student</th>
-                        <th>Ticket number</th>
-                        <th>Data_of_birthday</th>
-                        <th>Foto</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for student in list_students %}
-                    <tr>
-                        <td><span>{{ student.student_name }}</span></td>
-                        <td><span>{{ student.student_ticket_number }}</span></td>
-                        <td><span>{{ student.dob }}</span></td>
-                        <td>
-                            {% thumbnail student.foto "1000" as big %}
-                                {% thumbnail student.foto "100x100" crop="center" as small %}
-                                    <a href="{% static  big.url  %}" title="look">
-                                        <img src="{% static  small.url  %}">
-                                    </a>
-                                {% endthumbnail %}
-                            {% endthumbnail %}
-                        </td>
-
-                        <td>
-                            {% rend_reference student %}
-                            <a href="/changing_data/student/edition/{{ student.id_student }}/">Edit</a>
-                            <a href="/changing_data/student/delete/{{ student.id_student }}/">Delete</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        <div class="page-header"><br>
+            <h4>Edition of {{ name_group }}</h4>
+        </div>
+        <form class="form-inline" name='edit_group' action="/submition/{{ object_for_changing }}/{{ id_group }}/" method='post'>
+            <fildset>
+                <div class="form-group">
+                    <label for="name_group" class="control-label">Name of the Group</label>
+                    <input id="name_group" class="form-control" type="text" name="name_group" value="{{ name_group }}">
+                </div>
+                <div class="form-group">
+                    <label for="monitor_id" class="control-label">Monitor's name</label>
+                    <select id="monitor_id" class="form-control" name="monitor_id">
+                        {% for student in list_students %}
+                            <option value="{{ student.id_student }}"
+                                    {% if student.id_student == monitor_id %} selected="selected" {% endif %}>
+                                {{ student.student_name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <input type="submit" class="btn btn-success" value="Adopt">
+            </fildset>
         </form>
-        <div>CREATE NEW STUDENT</div>
-        <form name='new_student' action="/changing_data/{{ student }}/creation/{{ id_group }}/" method='post' enctype="multipart/form-data">
+        <div class="page-header">
+            <h4>Students</h4>
+        </div>
+        <table class=" table table-hover ">
+            <thead>
+                <tr>
+                    <th class="text-center">Name of Student</th>
+                    <th class="text-center">Ticket number</th>
+                    <th class="text-center">Data_of_birthday</th>
+                    <th class="text-center">Photo</th>
+                    <th class="text-center"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for student in list_students %}
+                <tr>
+                    <td class="text-center"><span>{{ student.student_name }}</span></td>
+                    <td class="text-center"><span>{{ student.student_ticket_number }}</span></td>
+                    <td class="text-center"><span>{{ student.dob }}</span></td>
+                    <td class="text-center">
+                        {% thumbnail student.photo "1000" as big %}
+                            {% thumbnail student.photo "100x100" crop="center" as small %}
+                                <a href="{% static  big.url  %}" title="look">
+                                    <img src="{% static  small.url  %}">
+                                </a>
+                            {% endthumbnail %}
+                        {% endthumbnail %}
+                    </td>
 
-            <label for="student_name">NAME STUDENT</label>
-            <input type="text" name="student_name">
-
-            <label for="student_ticket_number">STUDENT'S TICKET NUMBER</label>
-            <input type="text" name="student_ticket_number">
-
-            <label for="dob">DOB</label>
-            <input type="text" name="dob">
-
-            <label for="foto">FOTO</label>
-            <input type="file" name="foto">
-
-            <input type="submit" class="button" value="CREATE STUDENT">
-
+                    <td class="text-center">
+                        {% rend_reference student %}
+                        <a href="/changing_data/student/edition/{{ student.id_student }}/" class="btn btn-warning">Edit</a>
+                        <a href="/changing_data/student/delete/{{ student.id_student }}/" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="page-header">
+                <h4>Addition of the new student</h4>
+            </div>
+        <form class="form-inline" name='new_student' action="/changing_data/{{ student }}/creation/{{ id_group }}/" method='post' enctype="multipart/form-data">
+            <fildset>
+                <div class="form-group">
+                    <label for="student_name" class="control-label">Student's name</label>
+                    <input type="text" name="student_name" id="student_name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="student_ticket_number" class="control-label">Student's ticket number</label>
+                    <input type="text" name="student_ticket_number" id="student_ticket_number" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="dob" class="control-label">Date of birthday</label>
+                    <input type="text" name="dob" id="dob" class="form-control">
+                </div><br>
+                <label for="photo" >Photo</label><br>
+                {% thumbnail student.photo "1000" as big %}
+                    {% thumbnail student.photo "175x175" crop="center" as small %}
+                        <a  href="{% static  big.url  %}" title="look">
+                            <img  src="{% static  small.url  %}">
+                        </a>
+                    {% endthumbnail %}
+                {% endthumbnail %}
+                <div class="controls clearfix"><br>
+                    <div class="btn btn-success btn-file">
+                        <span class="choose">Choose file</span>
+                        <input type="file" name="photo"  id="photo">
+                    </div>
+                </div>
+                <div class="form-group"><br>
+                    <input type="submit" class=" btn btn-success" value="Add Student">
+                </div>
+            </fildset>
         </form>
 {% endblock %}

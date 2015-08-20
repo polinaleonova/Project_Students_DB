@@ -6,7 +6,6 @@ from django.shortcuts import render_to_response
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from models_project.models import Group, Student
-from sorl.thumbnail import get_thumbnail
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -60,8 +59,8 @@ def groups(request):
             'name_group': group_.name_group,
             'count': group_.student_set.count(),
             'id_group': group_.id,
-            'praepostor': group_.praepostor.student_name
-            if group_.praepostor else '-'
+            'monitor': group_.monitor.student_name
+            if group_.monitor else '-'
         })
         list_groups.append(context)
     context_dictionary = RequestContext(request,
@@ -76,11 +75,9 @@ def group(request, id_group):
     this_group = Group.objects.get(id=id_group)
     students = Student.objects.filter(group=this_group)
     for student in students:
-        # f=get_thumbnail(str(student.foto),'50x100')
         context = dict({
             'student_name': student.student_name,
-            'foto': str(student.foto)
-            # 'foto': f
+            'photo': str(student.photo)
         })
         list_students.append(context)
     paginator = Paginator(list_students, 5)
@@ -104,7 +101,7 @@ def submition(request, entity, id):
         group_ = Group.objects.get(id=id)
         if request.method == "POST":
             group_.name_group = request.POST.get('name_group')
-            group_.praepostor_id = request.POST.get('praepostor_id')
+            group_.monitor_id = request.POST.get('monitor_id')
             group_.save()
             return redirect('/changing/groups')
     else:
@@ -116,9 +113,9 @@ def submition(request, entity, id):
             student.student_name = request.POST.get('student_name')
             student.ticket_number = request.POST.get('student_ticket_number')
             student.date_birthday = request.POST.get('dob')
-            foto = request.FILES.get('foto')
-            if foto:
-                student.foto = foto
+            photo = request.FILES.get('photo')
+            if photo:
+                student.photo = photo
             if student.student_name != '':
                 student.save()
                 return redirect('/changing_data/groups/edition/' +
@@ -150,14 +147,14 @@ def changing_data(request, entity, action, id=None):
                 'student_name': student.student_name,
                 'student_ticket_number': student.ticket_number,
                 'dob': student.date_birthday,
-                'foto': str(student.foto),
+                'photo': str(student.photo),
                 'id_student': student.id
             })
             list_students.append(context)
 
         context_dictionary = RequestContext(request, {
             'list_students': list_students,
-            'praepostor_id': this_group.praepostor_id,
+            'monitor_id': this_group.monitor_id,
             'name_group': this_group.name_group,
             'object_for_changing': 'group',
             'id_group': id,
@@ -166,10 +163,11 @@ def changing_data(request, entity, action, id=None):
 
     def student_edition(id_student):
         student = Student.objects.get(id=id_student)
+        name_group=student.group
         context = dict({
             'student': student,
-            'foto': str(student.foto),
-            'object_for_changing': 'student'
+            'photo': str(student.photo),
+            'object_for_changing': 'student',
         })
         return render_to_response('form _edit_student.html', context)
 
@@ -187,15 +185,14 @@ def changing_data(request, entity, action, id=None):
             student_name = request.POST.get('student_name')
             ticket_number = request.POST.get('student_ticket_number')
             date_birthday = request.POST.get('dob')
-            foto = request.FILES.get('foto')
+            photo = request.FILES.get('photo')
             if student_name != '':
                 st_to_create = Student.objects.create(
                     student_name=student_name,
                     date_birthday=date_birthday,
                     ticket_number=ticket_number,
-                    foto=foto,
+                    photo=photo,
                     group_id=group_for_new_student.id)
-                # st_to_create.save()
         return redirect(
             '/changing_data/groups/edition/'+id_group+'/')
 
@@ -219,8 +216,8 @@ def changing(request, entity):
             'name_group': group_.name_group,
             'count': group_.student_set.count(),
             'id_group': group_.id,
-            'praepostor': group_.praepostor.student_name
-            if group_.praepostor else '-'
+            'monitor': group_.monitor.student_name
+            if group_.monitor else '-'
         })
         list_groups.append(context)
     context_dictionary = RequestContext(request,
