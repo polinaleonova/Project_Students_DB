@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 {% block register %}
-    <form name="reg" action="/auth/register/" method="post" style="display:block;">
+    <div class="page-header"><br>
+        <h4>Registration</h4>
+    </div>
+    <form  class="form-inline" name="reg" action="/auth/register/" method="post" >
         {% csrf_token %}
         {{ form }}
-        <input class="button" type="submit" value="SUBMIT" >
+        <br>
+        <br>
+        <input class="btn btn-success" type="submit" value="Submit" >
     </form>
 {% endblock %}

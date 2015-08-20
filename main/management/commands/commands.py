@@ -14,7 +14,7 @@ class Command(BaseCommand):
         """
         return json.dumps([{
             'group name': group.name_group,
-            'praepostor': str(group.praepostor),
+            'monitor': str(group.monitor),
             'students': [
                 {
                     'name': student.student_name,

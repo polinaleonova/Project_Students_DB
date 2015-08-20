@@ -7,37 +7,34 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'lib/bootstrap-3.3.5-dist/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
 {#    <script src="{% static 'js/lib/jquery-1.11.3.js' %}"></script>#}
 {#    <script src="{% static 'lib/bootstrap-3.3.5-dist/js/bootstrap.js' %}"></script>#}
 </head>
 
 <body>
-    <div id="b-navbar" style="background-color: darkseagreen">
-       <table class="table">
-        <tbody>
-            <tr>
-                <td>
-                {% block login %}{% endblock %}
-                {% block register %}{% endblock %}
-                {%  if user.username %}
-                <a href="/auth/logout/">Exit({{ user.username }})</a>
-                {% else %}
-                <a href="/auth/login/">Enter</a>
-                {% endif %}
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div id="navbar-main" class="navbar navbar-default navbar-fixed-top main_color" >
+        <div class="container">
+        <a href="/groups/" class="navbar-brand">DataBaseStudents</a>
+        <ul class="nav navbar-nav navbar-right">
+         <li><a href="/changing/groups/">Make changes to the database</a></li>
+            {%  if user.username %}
+            <li><a href="/auth/logout/">Exit({{ user.username }})</a></li>
+            {% else %}
+            <li><a href="/auth/login/">Enter</a></li>
+            {% endif %}
+        </ul>
+        </div>
     </div>
-    {% block groups %}{% endblock %}
-    {% block group %}{% endblock %}
-<div class="menu">
-</div>
-{% block form_edit_groups %}{% endblock %}
-{% block form_edit_student %}{% endblock %}
-{% block middleware %}{% endblock %}
-
-
+    <div class="container content main_color">
+        {% block login %}{% endblock %}
+        {% block register %}{% endblock %}
+        {% block groups %}{% endblock %}
+        {% block group %}{% endblock %}
+        {% block form_edit_groups %}{% endblock %}
+        {% block form_edit_student %}{% endblock %}
+    </div>
 <br>
+{#{{ settings.DATABASES }}#}
 </body>
 </html>

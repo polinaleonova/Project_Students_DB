@@ -10,8 +10,8 @@ class Student(models.Model):
     student_name = models.CharField(max_length=50)
     date_birthday = models.DateField(null=True)
     ticket_number = models.IntegerField(null=True)
-    foto = ImageField(
-        upload_to='img/foto',
+    photo = ImageField(
+        upload_to='img/photo',
         null=True,
         blank=True
     )
@@ -21,11 +21,11 @@ class Student(models.Model):
     )
 
     def get_thumbnail_html(self):
-        img = self.foto
+        img = self.photo
         html = ''
         if img.name != '':
             img_resize_url = unicode(get_thumbnail(img, '50x50').url)
-            html = '<img src="/static/{}" alt="foto"/>'.format(img_resize_url)
+            html = '<img src="/static/{}" alt="photo"/>'.format(img_resize_url)
         return html
 
     get_thumbnail_html.allow_tags = True
@@ -36,8 +36,8 @@ class Student(models.Model):
 
 class Group(models.Model):
     name_group = models.CharField(max_length=50)
-    praepostor = models.OneToOneField(Student,
-                                      related_name='praepostor_of_group',
+    monitor = models.OneToOneField(Student,
+                                      related_name='monitor_of_group',
                                       on_delete=models.SET_NULL,
                                       blank=True,
                                       null=True)

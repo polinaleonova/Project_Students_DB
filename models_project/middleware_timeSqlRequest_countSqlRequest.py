@@ -18,8 +18,8 @@ class SqlRequestParametersMiddleware(object):
             time_spend = '{0:.4f}ms'.format(
                 (time.time()-request.start_time)*1000
             )
-            insert = '<span>Counts of SQL calls = {}. Processing of HTML ' \
-                     'request taken {}.</span>'.format(count_request,
+            insert = '<div class="footer"><span >Counts of SQL calls = {}. Processing of HTTP ' \
+                     'request taken {}.</span></div>'.format(count_request,
                                                        time_spend)
             response.content = first_part + insert + second_part
         return response

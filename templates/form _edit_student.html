@@ -2,32 +2,47 @@
 {% load static from staticfiles %}
 {% load thumbnail %}
 {% block form_edit_student %}
-    <div>FORM FOR EDITION STUDENT</div>
-    <form name='edit_group' action="/submition/{{ object_for_changing }}/{{ student.id }}/" method='post' enctype="multipart/form-data">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name of Student</th><th>Ticket number</th><th>Data_of_birthday</th><th>Foto</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="text" name="student_name" value="{{ student.student_name }}"></td>
-                    <td><input type="text" name="student_ticket_number" value="{{ student.ticket_number }}"></td>
-                    <td><input type="text" name="dob" value="{{ student.date_birthday|date:"c" }}"></td>
-                    <td>
-                        {% thumbnail student.foto "1000" as big %}
-                            {% thumbnail student.foto "100x100" crop="center" as small %}
-                                <a href="{% static  big.url  %}" title="look">
-                                    <img src="{% static  small.url  %}">
-                                </a>
-                            {% endthumbnail %}
-                        {% endthumbnail %}
-                        <input type="file" name="foto" value="{{ student.foto }}">
-                    </td>
-                    <td><input type="submit" class="button" value="SUBMIT"></td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
+    <div class="container">
+        <div class="bs-docs-section" >
+            <br>    
+            <div class="page-header text-center">
+                <h4>Edition of student's data</h4>
+            </div>
+            <form class="form-inline" name='edit_group' action="/submition/{{ object_for_changing }}/{{ student.id }}/" method='post' enctype="multipart/form-data">
+                <fildset>
+                    <div class="form-group">
+                        <label for="student_name" class="control-label">Name of Student</label>
+                        <input type="text" name="student_name" class="form-control" id="student_name" value="{{ student.student_name }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="student_ticket_number" class="control-label">Ticket number</label>
+                        <input type="text" name="student_ticket_number" class="form-control" id="student_ticket_number" value="{{ student.ticket_number }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="dob" class="control-label">Data_of_birthday</label>
+                        <input type="text" name="dob"  class="form-control" id="dob" value="{{ student.date_birthday|date:"c" }}">
+                    </div>
+                    <br>
+                    <label for="photo" >Photo</label><br>
+                        {% thumbnail student.photo "1000" as big %}
+                                        {% thumbnail student.photo "175x175" crop="center" as small %}
+                                            <a  href="{% static  big.url  %}" title="look">
+                                                <img  src="{% static  small.url  %}">
+                                            </a>
+                                        {% endthumbnail %}
+                                    {% endthumbnail %}
+
+                    <div class="controls clearfix"><br>
+                        <div class="btn btn-success btn-file">
+                            <span class="choose">Choose file</span>
+                            <input type="file" name="photo"  id="photo"></div>
+                        </div>
+                    <div class="form-group"><br>
+                        <input type="submit" value="Adopt" id="submit" class=" btn btn-success">
+                   </div>
+                </fildset>
+            </form>
+        </div>
+    </div>
+
 {% endblock %}
