@@ -15,7 +15,6 @@ class StudentAdmin(admin.ModelAdmin):
     list_display = ['student_name', 'date_birthday', 'ticket_number', 'get_thumbnail_html']
 
 
-
-admin.site.register(Student, StudentAdmin)
+# admin.site.register(Student, StudentAdmin)
 admin.site.register(Group, GroupAdmin)
 admin.site.register(History)

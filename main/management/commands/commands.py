@@ -23,6 +23,7 @@ class Command(BaseCommand):
                 } for student in group.student_set.all()]
         } for group in models.Group.objects.all()])
 
+
     def handle(self, *args, **options):
         action = args[0]
         if hasattr(self, action):
