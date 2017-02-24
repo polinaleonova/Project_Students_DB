@@ -200,4 +200,5 @@ CACHES = {
 THUMBNAIL_CACHE = 'thum'
 THUMBNAIL_DEBUG = True
 # THUMBNAIL_STORAGE = os.path.join(BASE_DIR, 'static/img/photo/cache')
+
 import local_settings

@@ -7,13 +7,13 @@ class StudentInline(admin.TabularInline):
 
 
 class GroupAdmin(admin.ModelAdmin):
+    list_display = ['name_group', 'monitor']
     inlines = [StudentInline]
 
 
 class StudentAdmin(admin.ModelAdmin):
     pass
     list_display = ['student_name', 'date_birthday', 'ticket_number', 'get_thumbnail_html']
-
 
 
 admin.site.register(Student, StudentAdmin)
