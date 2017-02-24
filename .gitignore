@@ -1,3 +1,4 @@
 *.pyc
 .idea
 cache
+local_settings.py
